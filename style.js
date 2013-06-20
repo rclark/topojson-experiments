@@ -1,5 +1,5 @@
 function polyStyle(feature) {
-    switch (feature.properties.mapunit) {
+    switch (feature.properties.MapUnit) {
             case "P*et": return { weight: 0, fillOpacity: 0.7, fillColor: "#59E8FF" };
             case "Qyaf": return { weight: 0, fillOpacity: 0.7, fillColor: "#ECECC0" }
             case "Ygg": return { weight: 0, fillOpacity: 0.7, fillColor: "#9E2637" };
