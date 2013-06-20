@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%; width:100%; padding:0; margin:0;">
+  <head>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css">
+  </head>
+  <body style="height:100%; width:100%; padding:0; margin:0;">
+    <div id="map" style="height:100%; width:100%; padding:0; margin:0;"></div>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+    <script src="style.js"></script>
+    <script>
+      L.TopoJSON = L.GeoJSON.extend({
+        addData: function(jsonData) {
+          if (jsonData.type === "Topology") {
+            for (key in jsonData.objects) {
+              var geojson = topojson.feature(jsonData, jsonData.objects[key]);
+              L.GeoJSON.prototype.addData.call(this, geojson);
+            }
+          }
+          else {
+            L.GeoJSON.prototype.addData.call(this, jsonData);
+          }
+        }
+      });
+    </script>
+    <script>
+      var map = new L.Map("map", {
+          center: new L.LatLng(32.1855, -110.4356),
+          zoom: 12,
+          layers: [new L.TileLayer("http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg")]
+      });
+      
+      function jsonp(data) {
+          var polys = new L.TopoJSON(data, { style: polyStyle });
+          polys.addTo(map);
+      }
+      
+    </script>
+    <script src="topojsonp.js"></script>
+  </body>
+</html>
