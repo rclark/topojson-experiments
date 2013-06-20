@@ -1,5 +1,6 @@
-function polyStyle(feature) {
-    switch (feature.properties.MapUnit) {
+function hpvStyle(feature) {
+    if ("MapUnit" in feature.properties) {
+        switch (feature.properties.MapUnit) {
             case "P*et": return { weight: 0, fillOpacity: 0.7, fillColor: "#59E8FF" };
             case "Qyaf": return { weight: 0, fillOpacity: 0.7, fillColor: "#ECECC0" }
             case "Ygg": return { weight: 0, fillOpacity: 0.7, fillColor: "#9E2637" };
@@ -67,5 +68,14 @@ function polyStyle(feature) {
             case "Qtc": return { weight: 0, fillOpacity: 0.7, fillColor: "#F5EBCD" };
             case "Tcu": return { weight: 0, fillOpacity: 0.7, fillColor: "#E0A491" };
             case "TXa": return { weight: 0, fillOpacity: 0.7, fillColor: "#F000FF" };
+        }
+    }
+    
+    if ("Symbol" in feature.properties) {
+        if (feature.properties.Symbol < 53) {
+            return { fillOpacity: 0, weight: 0.5, opacity: 1, color: "#000" }
+        } else {
+            return { fillOpacity: 0, weight: 2, opacity: 1, color: "#000" }
+        }
     }
 }
