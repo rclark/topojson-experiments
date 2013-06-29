@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%; width:100%; padding:0; margin:0;">
+  <head>
+    <meta charset="utf-8">
+    <title>Vector-Tiles and TopoJSON on Leaflet.js</title>
+      
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.css">
+  </head>
+    
+  <body style="height:100%; width:100%; padding:0; margin:0;">
+    <div id="map" style="height:100%; width:100%; padding:0; margin:0;"></div>
+      
+    <!-- Leaflet Script -->
+    <script src="http://cdn.leafletjs.com/leaflet-0.6.2/leaflet.js"></script>
+      
+    <!-- jQuery (L.TileLayer.GeoJSON dependency) -->
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+      
+    <!-- JSTS (L.GeoJSON.PlusOne optional dependency) -->
+    <script src="https://rawgithub.com/bjornharrtell/jsts/master/lib/javascript.util.js"></script>
+    <script src="https://rawgithub.com/bjornharrtell/jsts/master/lib/jsts.js"></script>
+      
+    <!-- TopoJSON (L.GeoJSON.PlusOne optional dependency) -->
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+      
+    <!-- Custom Leaflet Layers -->
+    <script src="L.GeoJSON.PlusOne.js"></script>
+    <script src="L.TileLayer.GeoJSON.js"></script>
+      
+    <!-- Construct the map -->
+    <script>
+      var baseLayer = new L.TileLayer("http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg"),
+          polyLayer = new L.TileLayer.GeoJSON(
+            //"https://rawgithub.com/rclark/happy-valley-tiles/master/geopolys/{z}/{x}/{y}.geojson"
+            "http://ec2-54-215-153-86.us-west-1.compute.amazonaws.com/happy-valley/geojson/{z}/{x}/{y}.geojson"
+          )
+    
+      var map = new L.Map("map", {
+          center: new L.LatLng(32.1855, -110.4356),
+          zoom: 12,
+          layers: [baseLayer, polyLayer]
+      });
+    </script>  
+  </body>
+</html>
