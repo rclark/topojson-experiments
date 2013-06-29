@@ -27,12 +27,16 @@
     <!-- Custom Leaflet Layers -->
     <script src="L.GeoJSON.PlusOne.js"></script>
     <script src="L.TileLayer.GeoJSON.js"></script>
+    
+    <!-- Symbology -->
+    <script src="style.js"></script>
       
     <!-- Construct the map -->
     <script>
       var baseLayer = new L.TileLayer("http://{s}.tiles.mapbox.com/v3/rclark.map-lgs3w52k/{z}/{x}/{y}.png"),
           polyLayer = new L.TileLayer.GeoJSON(
-            "http://{s}.usgin.org/happy-valley/topojson/{z}/{x}/{y}.topojson"
+            "http://{s}.usgin.org/happy-valley/topojson/{z}/{x}/{y}.topojson",
+              { style: hpvStyle }
           )
     
       var map = new L.Map("map", {
